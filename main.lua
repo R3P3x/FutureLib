@@ -1,3 +1,7 @@
+--[[
+  Library loadstring: require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/main.lua"))
+]]
+
 local function tobecreated()
   warn("libraries set to tobecreated are libraries that are planned/confirmed to be added in the future but i dont have the time to do it yet, if you see this warn in console it means you called a lib that hasnt been added yet.")
 end
