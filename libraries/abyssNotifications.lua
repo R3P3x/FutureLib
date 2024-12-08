@@ -9,7 +9,7 @@ if not getfenv() then
     local AbyssGUI = Instance.new("ScreenGui"); AbyssGUI.Name = "Abyss"; AbyssGUI.Parent = plr.PlayerGui; AbyssGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
   
     local Notification = Instance.new("Frame")
-   	local Line = Instance.new("Frame")
+    local Line = Instance.new("Frame")
     local Warning = Instance.new("ImageLabel")
     local UICorner = Instance.new("UICorner")
     local Title = Instance.new("TextLabel")
