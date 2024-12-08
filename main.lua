@@ -16,6 +16,6 @@ lib.UI = {}
 
 lib.UI.Fluent = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/Fluent.lua))
 
-lib.UI.0x37 = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/0x37.lua))
+lib.UI["0x37"] = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/0x37.lua))
 
 return lib
