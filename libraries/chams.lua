@@ -12,7 +12,7 @@ local playerConnections = {}
 
 chams.apply = function(plr : Player, transparency, outlineTransparency, colorOverwrite)
     local function applyToCharacter(character)
-        chams.remove(plr)
+        --chams.remove(plr)
 
         local fillColor
         if colorOverwrite then
