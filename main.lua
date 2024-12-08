@@ -18,6 +18,8 @@ lib.Notification = {}
 
 lib.Notification.AbyssNotifications = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/abyssNotifications.lua"))
 
+lib.Notification.unnamedbuildinrobloxnotificationsbutmadeeasy = tobecreated()
+
 lib.UI = {}
 
 lib.UI.Fluent = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/Fluent.lua"))
