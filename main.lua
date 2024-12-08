@@ -6,16 +6,18 @@ local lib = {}
 
 lib.ESP = {}
 
-lib.ESP.UsernameESP = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/UsernameESP.lua))
+lib.ESP.UsernameESP = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/UsernameESP.lua"))
+
+lib.ESP.Chams = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/chams.lua"))
 
 lib.Notification = {}
 
-lib.Notification.AbyssNotifications = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/abyssNotifications.lua))
+lib.Notification.AbyssNotifications = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/abyssNotifications.lua"))
 
 lib.UI = {}
 
-lib.UI.Fluent = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/Fluent.lua))
+lib.UI.Fluent = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/Fluent.lua"))
 
-lib.UI["0x37"] = require(game:HttpGet(https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/0x37.lua))
+lib.UI["0x37"] = require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/0x37.lua"))
 
 return lib
