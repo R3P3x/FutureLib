@@ -12,6 +12,8 @@ lib.ESP.NameESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P
 
 lib.ESP.Chams = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/chams.lua"))()
 
+lib.ESP.HighlightService = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/highlightService.lua"))
+
 lib.Notification = {}
 
 lib.Notification.AbyssNotifications = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/abyssNotifications.lua"))()
