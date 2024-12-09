@@ -1,5 +1,5 @@
 --[[
-  Library loadstring: require(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/main.lua"))
+  Library loadstring: loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/main.lua"))()
 ]]
 
 local lib = {}
