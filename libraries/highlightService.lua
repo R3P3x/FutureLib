@@ -52,5 +52,3 @@ function highlightService.remove(BasePart)
 end
 
 return highlightService
-
-]]
