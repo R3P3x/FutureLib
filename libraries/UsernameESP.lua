@@ -4,24 +4,24 @@
 
 local UsernameESP = {}
 
-UsernameESP.apply = function ApplyESP(player : Player)
-   if player.Character and player.Character:FindFirstChildOfClass'Humanoid' then
-       player.Character.Humanoid.NameDisplayDistance = 9e9
-       player.Character.Humanoid.NameOcclusion = "NoOcclusion"
-       player.Character.Humanoid.HealthDisplayDistance = 9e9
-       player.Character.Humanoid.HealthDisplayType = "AlwaysOn"
-       player.Character.Humanoid.Health = player.Character.Humanoid.Health
-   end
+function UsernameESP.apply(player)
+    if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+        humanoid.NameDisplayDistance = 9e9
+        humanoid.NameOcclusion = "NoOcclusion"
+        humanoid.HealthDisplayDistance = 9e9
+        humanoid.HealthDisplayType = "AlwaysOn"
+    end
 end
 
-UsernameESP.remove = function ApplyESP(player : Player)
-   if player.Character and player.Character:FindFirstChildOfClass'Humanoid' then
-       player.Character.Humanoid.NameDisplayDistance = 100
-       player.Character.Humanoid.NameOcclusion = "EnemyOcclusion"
-       player.Character.Humanoid.HealthDisplayDistance = 50
-       player.Character.Humanoid.HealthDisplayType = "WhenDamaged"
-       player.Character.Humanoid.Health = player.Character.Humanoid.Health
-   end
+function UsernameESP.remove(player)
+    if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+        humanoid.NameDisplayDistance = 100
+        humanoid.NameOcclusion = "EnemyOcclusion"
+        humanoid.HealthDisplayDistance = 50
+        humanoid.HealthDisplayType = "WhenDamaged"
+    end
 end
 
 return UsernameESP
