@@ -6,165 +6,78 @@
 
 local ESP = {}
 
-local settings = {
-    Color = Color3.fromRGB(255, 0, 0),
-    Size = 15,
-    Transparency = 1,
-    AutoScale = true
-}
-
-local space = game:GetService("Workspace")
-local players = game:GetService("Players")
-local localPlayer = players.LocalPlayer
-local camera = space.CurrentCamera
-
-local activeESP = {}
-
-local function NewText(color, size, transparency)
-    local text = Drawing.new("Text")
-    text.Visible = false
-    text.Text = ""
-    text.Position = Vector2.new(0, 0)
-    text.Color = color
-    text.Size = size
-    text.Center = true
-    text.Transparency = transparency
-    return text
-end
-
-local function SetVisibility(state, lib)
-    for _, instance in pairs(lib) do
-        instance.Visible = state
-    end
-end
-
-local function SetSize(size, lib)
-    for _, instance in pairs(lib) do
-        instance.Size = size
-    end
-end
-
-local function CreatePlayerESP(player, library)
-    local function UpdateESP()
-        local connection
-        connection = game:GetService("RunService").RenderStepped:Connect(function()
-            if player.Character
-                and player.Character:FindFirstChild("Humanoid")
-                and player.Character:FindFirstChild("HumanoidRootPart")
-                and player.Name ~= localPlayer.Name
-                and player.Character.Humanoid.Health > 0
-            then
-                local rootPartPosition, onScreen = camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
-                if onScreen then
-                    library.name.Text = player.Name
-                    library.name.Position = Vector2.new(rootPartPosition.X, rootPartPosition.Y)
-                    if settings.AutoScale then
-                        local distance = (camera.CFrame.Position - player.Character.HumanoidRootPart.Position).Magnitude
-                        local textSize = math.clamp(1 / distance * 1000, 2, 30)
-                        SetSize(textSize, library)
-                    else
-                        SetSize(settings.Size, library)
-                    end
-                    SetVisibility(true, library)
-                else
-                    SetVisibility(false, library)
-                end
-            else
-                SetVisibility(false, library)
-                if not players:FindFirstChild(player.Name) then
-                    connection:Disconnect()
-                end
-            end
-        end)
-
-        activeESP[player] = {connection = connection, library = library}
-    end
-
-    coroutine.wrap(UpdateESP)()
-end
+-- Store references to the ESPs for each player
+ESP.PlayerESP = {}
 
 function ESP.apply(customSettings, target)
-    if customSettings then
-        for key, value in pairs(customSettings) do
-            settings[key] = value
+    -- If no target, apply to all players
+    if target == nil then
+        for _, player in pairs(game.Players:GetPlayers()) do
+            ESP.apply(customSettings, player)
         end
+        return
     end
 
-    local function applyToPlayer(player)
-        if activeESP[player] then
-            ESP.remove(player) -- Remove existing ESP for this player to avoid duplication
+    -- Handle the specific player or players
+    if type(target) == "table" then
+        for _, player in pairs(target) do
+            ESP.apply(customSettings, player)
         end
-
-        local library = {
-            name = NewText(settings.Color, settings.Size, settings.Transparency)
-        }
-        CreatePlayerESP(player, library)
+        return
     end
 
-    if target then
-        if typeof(target) == "Instance" and target:IsA("Player") then
-            -- Apply to a single player
-            applyToPlayer(target)
-        elseif typeof(target) == "table" then
-            -- Apply to a list of players
-            for _, player in ipairs(target) do
-                if typeof(player) == "Instance" and player:IsA("Player") then
-                    applyToPlayer(player)
-                end
-            end
-        end
-    else
-        -- Apply to all players
-        for _, player in ipairs(players:GetPlayers()) do
-            if player ~= localPlayer then
-                applyToPlayer(player)
-            end
-        end
-
-        players.PlayerAdded:Connect(function(newPlayer)
-            if newPlayer ~= localPlayer then
-                applyToPlayer(newPlayer)
-            end
-        end)
+    -- If the ESP already exists for this player, do nothing
+    if ESP.PlayerESP[target] then
+        return
     end
+
+    -- Create the ESP for the player
+    local nameTag = Instance.new("BillboardGui")
+    nameTag.Adornee = target.Character:WaitForChild("Head")
+    nameTag.Parent = target.Character:WaitForChild("Head")
+    nameTag.Size = UDim2.new(0, 200, 0, 50)
+    nameTag.StudsOffset = Vector3.new(0, 2, 0)
+    nameTag.AlwaysOnTop = true
+    nameTag.Name = "NameESP"
+
+    -- Create the text label for the name
+    local nameText = Instance.new("TextLabel")
+    nameText.Parent = nameTag
+    nameText.Text = target.Name
+    nameText.Size = UDim2.new(1, 0, 1, 0)
+    nameText.TextColor3 = customSettings and customSettings.Color or Color3.fromRGB(255, 255, 255)
+    nameText.TextSize = customSettings and customSettings.Size or 16
+    nameText.TextTransparency = customSettings and customSettings.Transparency or 0
+    nameText.BackgroundTransparency = 1
+
+    -- Store the created ESP for later removal
+    ESP.PlayerESP[target] = nameTag
 end
 
 function ESP.remove(target)
-    local function removeFromPlayer(player)
-        if activeESP[player] then
-            local data = activeESP[player]
-            if data.connection then
-                data.connection:Disconnect()
-            end
-            if data.library then
-                for _, text in pairs(data.library) do
-                    if typeof(text) == "Instance" or typeof(text) == "userdata" then
-                        text:Remove()
-                    end
-                end
-            end
-            activeESP[player] = nil
+    -- If no target, remove from all players
+    if target == nil then
+        for _, player in pairs(game.Players:GetPlayers()) do
+            ESP.remove(player)
         end
+        return
     end
 
-    if target then
-        if typeof(target) == "Instance" and target:IsA("Player") then
-            -- Remove from a single player
-            removeFromPlayer(target)
-        elseif typeof(target) == "table" then
-            -- Remove from a list of players
-            for _, player in ipairs(target) do
-                if typeof(player) == "Instance" and player:IsA("Player") then
-                    removeFromPlayer(player)
-                end
-            end
+    -- Handle the specific player or players
+    if type(target) == "table" then
+        for _, player in pairs(target) do
+            ESP.remove(player)
         end
-    else
-        -- Remove from all players
-        for player, _ in pairs(activeESP) do
-            removeFromPlayer(player)
-        end
+        return
+    end
+
+    -- Check if the ESP exists for this player
+    if ESP.PlayerESP[target] then
+        local nameTag = ESP.PlayerESP[target]
+        nameTag:Destroy()
+        ESP.PlayerESP[target] = nil
     end
 end
 
 return ESP
+
