@@ -29,7 +29,7 @@ function highlightService.highlight(BasePart, color)
     if BasePart:IsA("BasePart") then
         hl.Parent = BasePart
     elseif BasePart:IsA("Table") then
-        for _, part in BasePart do
+        for _, part in ipairs(BasePart) do
             local hlC = hl:Clone()
             hlC.Parent = part
         end
@@ -44,7 +44,7 @@ function highlightService.remove(BasePart)
         local hl = BasePart:FindFirstDescendant("highlightServiceHighlight")
         if hl then hl:Destroy() end
     elseif BasePart:IsA("Table") then
-        for _, part in BasePart do
+        for _, part in ipairs(BasePart) do
             local hl = BasePart:FindFirstDescendant("highlightServiceHighlight")
             if hl then hl:Destroy() end
         end
