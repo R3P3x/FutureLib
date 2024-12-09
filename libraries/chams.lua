@@ -10,7 +10,7 @@ local DEFAULT_COLOR = Color3.new(1, 1, 1)
 
 local playerConnections = {}
 
-chams.apply = function(plr : Player, transparency, outlineTransparency, colorOverwrite)
+function chams.apply(plr, transparency, outlineTransparency, colorOverwrite)
     local function applyToCharacter(character)
         local fillColor
         if colorOverwrite then
@@ -26,12 +26,6 @@ chams.apply = function(plr : Player, transparency, outlineTransparency, colorOve
         hl.OutlineTransparency = outlineTransparency
         hl.Enabled = true
         hl.Parent = character
-      for _, part in character:GetDescendants() do
-        if part:IsA("BasePart") or part:IsA("SpecialMesh") then
-          local hlC = hl:Clone()
-          hlC.Parent = part
-        end
-      end
     end
 
     if playerConnections[plr] then
@@ -50,7 +44,7 @@ chams.apply = function(plr : Player, transparency, outlineTransparency, colorOve
     end
 end
 
-chams.remove = function(plr : Player)
+function chams.remove(plr)
     if plr.Character then
         for _, child in ipairs(plr.Character:GetChildren()) do
             if child:IsA("Highlight") then
