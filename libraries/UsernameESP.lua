@@ -1,4 +1,6 @@
 --[[
+  Note: This script seems to be broken atleast when used in an exploit, im trying to figure out why, if you know why please join the Future Hub discord and contact me!
+
   This script is compatible with Roblox games!
 ]]
 
