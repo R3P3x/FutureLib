@@ -26,6 +26,6 @@ function UsernameESP.remove(player)
     end
 end
 
-warn("UsernameESP is currently broken (atleast in exploits), i do not know why and im trying to figure it out, for now tho, dont use it.")
+warn("FutureLib warning: UsernameESP is currently broken (atleast in exploits), i do not know why and im trying to figure it out, for now tho, dont use it.")
 
 return UsernameESP
