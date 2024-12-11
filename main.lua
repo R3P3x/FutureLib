@@ -6,8 +6,6 @@ local lib = {}
 
 lib.ESP = {}
 
---broken lib.ESP.UsernameESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/UsernameESP.lua"))()
-
 lib.ESP.NameESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/NameESP.lua"))()
 
 lib.ESP.Chams = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/chams.lua"))()
