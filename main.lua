@@ -24,6 +24,6 @@ lib.UI.Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x
 
 lib.UI["0x37"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/0x37.lua"))()
 
-lib.LucideIcons = loadstring(game:HttpGet("https://github.com/R3P3x/FutureLib/blob/main/libraries/LucideIcons.lua"))
+lib.LucideIcons = loadstring(game:HttpGet("https://raw.githubusercontent.com/R3P3x/FutureLib/refs/heads/main/libraries/LucideIcons.lua"))
 
 return lib
